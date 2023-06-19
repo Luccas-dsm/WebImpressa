@@ -1,0 +1,177 @@
+﻿@page "/"
+@using Impressa.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<main>
+    <section class="espacamento">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-center espacamento-sm">Principais produtos</h3>
+                <div class="col-md-12">
+                    <div class="cartazes">
+                        @foreach (var item in Home)
+                        {
+                            <div class="cartaz">
+                                <img src="@item.Imagem" width="245">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="espacamento">
+        <div class="container">
+            <div class="row row align-items-stretch justify-content-start card-deck">
+                <h3 class="text-center espacamento-sm">Categorias</h3>
+                <div class="col-md-12">
+                    <div class="categorias">
+                        @foreach (var item in Produtos)
+                        {
+                            <div class="cartao">
+                                <img src="@item.Imagem"
+                                     alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title" @onclick="@(() => Navigation.NavigateTo("/category/"+item.Id))"> @item.Nome </h5>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="espacamento">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-center espacamento-sm">Nossos Serviços</h3>
+
+                <div class="col-md-12">
+                    <div class="cartazes">
+                        <div class="cartaz qr cr">
+                        </div>
+                        <div class="cartaz qr cr">
+                        </div>
+                        <div class="cartaz qr cr">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@code {
+
+    private List<MockModel>? Home;
+
+    List<ProdutoModel>? Produtos = new List<ProdutoModel>();
+    //    List<ProdutoModel> Produtos = new List<ProdutoModel>()
+    //    {
+
+    //        // Adicionar produtos à lista de produtos da gráfica
+    //        new ProdutoModel
+    //            {
+    //            Id = "1",
+    //            Nome = "Cartões de Visita",
+    //            Descricao = "Cartões de visita personalizados com design profissional.",
+    //            Preco = 49.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //            },
+
+    //        new ProdutoModel
+    //            {
+    //            Id = "2",
+    //            Nome = "Flyers",
+    //            Descricao = "Flyers impressos em alta qualidade para divulgação de eventos.",
+    //            Preco = 29.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //            },
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "3",
+    //            Nome = "Panfletos",
+    //            Descricao = "Panfletos coloridos e atrativos para promover seu negócio.",
+    //            Preco = 19.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "4",
+    //            Nome = "Folders",
+    //            Descricao = "Folders informativos com design profissional e acabamento sofisticado.",
+    //            Preco = 69.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "5",
+    //            Nome = "Banners",
+    //            Descricao = "Banners personalizados para eventos e exposições.",
+    //            Preco = 99.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+    //         new ProdutoModel
+    //        {
+    //            Id = "6",
+    //            Nome = "Adesivos",
+    //            Descricao = "Adesivos impressos em alta qualidade para uso promocional.",
+    //            Preco = 9.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "7",
+    //            Nome = "Calendários",
+    //            Descricao = "Calendários personalizados com imagens e informações relevantes.",
+    //            Preco = 39.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "8",
+    //            Nome = "Ímãs de Geladeira",
+    //            Descricao = "Ímãs de geladeira personalizados com design criativo.",
+    //            Preco = 14.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "9",
+    //            Nome = "Cadernos Personalizados",
+    //            Descricao = "Cadernos personalizados com capa dura e páginas de alta qualidade.",
+    //            Preco = 24.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        },
+
+    //        new ProdutoModel
+    //        {
+    //            Id = "10",
+    //            Nome = "Envelopes",
+    //            Descricao = "Envelopes personalizados para correspondências e documentos.",
+    //            Preco = 19.99,
+    //            Imagem = "../../../assets/categoria-sm.png"
+    //        }
+    //};
+    protected override async Task OnInitializedAsync()
+    {
+        Home = await Http.GetFromJsonAsync<List<MockModel>>("Home");
+        Produtos = await Http.GetFromJsonAsync<List<ProdutoModel>>("Produto");
+
+        //foreach (var item in Produtos)
+        //{
+        //    await Http.PostAsJsonAsync<ProdutoModel>("Produto", item);
+        //}
+
+    }
+
+}

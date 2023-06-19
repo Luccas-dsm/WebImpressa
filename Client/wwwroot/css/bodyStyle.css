@@ -1,0 +1,64 @@
+﻿
+$primary-color: #0D4E55;
+
+.bd {
+    font-weight: 900;
+}
+
+.cr {
+    border-radius: 50%;
+}
+
+.qr {
+    aspect-ratio: 1/1 !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.espacamento {
+    margin: 100px 0;
+}
+
+.espacamento-sm {
+    margin: 25px 0;
+}
+
+
+.cartaz {
+    aspect-ratio: 245/332;
+    width: 245px;
+    background-color: #00b637;
+}
+
+.cartazes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.cartao {
+    width: 30%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
+}
+
+.card-body {
+    text-align: center;
+}
+
+    .card-body:hover {
+        background-color: #0D4E55;
+        color: white;
+        cursor: pointer;
+    }
+
+.categorias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+}

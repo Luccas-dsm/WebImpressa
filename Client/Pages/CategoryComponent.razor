@@ -1,0 +1,50 @@
+﻿@page "/category/{id}"
+@using Impressa.Shared.Models
+@inject HttpClient Http
+
+@if (produtos == null)
+{
+    <p> Loading...</p>
+}
+<section class="espacamento">
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm">
+                <div class="img-categoria">
+                    <img src="../../../assets/categoria.png" alt="categoria">
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="titulo-categoria">
+                    <h1>@produto.Nome</h1>
+                </div>
+                <div class="descricao-categoria">
+
+                    @produto.Descricao
+
+                </div>
+
+                <div class="titulo-categoria">
+                    <h1>@produto.Preco</h1>
+                </div>
+                <div class="botao-categoria">
+                    <button type="button" class="btn btn-success">whatsapp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private List<ProdutoModel>? produtos = new List<ProdutoModel>();
+    private ProdutoModel? produto = new ProdutoModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        //produtos = await Http.GetFromJsonAsync<List<ProdutoModel>>("Produto");
+        produto = await Http.GetFromJsonAsync<ProdutoModel>($"Produto/{Id}");
+    }
+}

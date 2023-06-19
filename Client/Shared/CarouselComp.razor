@@ -1,0 +1,14 @@
+﻿<Carousel @bind-SelectedSlide="@selectedSlide">
+    <CarouselSlide Name="1">
+        <Image Source="https://blazorise.com/img/gallery/3.jpg" Text="Lights image" Display="Display.Block" Width="Width.Is100" Height="Height.Is100" />
+    </CarouselSlide>
+    <CarouselSlide Name="2">
+        <Image Source="https://blazorise.com/img/gallery/1.jpg" Text="Keyboard image" Display="Display.Block" Width="Width.Is100" Height="Height.Is100" />
+    </CarouselSlide>
+    <CarouselSlide Name="3">
+        <Image Source="https://blazorise.com/img/gallery/2.jpg" Text="Road image" Display="Display.Block" Width="Width.Is100" Height="Height.Is100" />
+    </CarouselSlide>
+</Carousel>
+@code {
+    private string selectedSlide = "2";
+}

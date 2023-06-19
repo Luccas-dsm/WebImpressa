@@ -1,0 +1,55 @@
+﻿@inject NavigationManager Navigation
+
+
+<header>
+    <div class="cabecalho">
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm logo">
+                    <img class="logo-header" src="../../../assets/Logo.svg" alt="" @onclick="@(() => Navigation.NavigateTo("/"))">
+                </div>
+                <div class="col-sm d-flex align-items-center justify-content-end">
+                    <div class="slogan">
+                        <p>Deixe a vida com mais cor!</p>
+                        <p>(31) 9 9140-7186</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="bar-navegacao">
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm">
+                    <ul class="menu text-center">
+
+                        <li class="barra-hover">
+                            <div class="barra">
+                            </div><a @onclick="@(() => Navigation.NavigateTo("/products"))">Produtos</a>
+                        </li>
+
+                        <li class="barra-hover">
+                            <div class="barra">
+                            </div><a @onclick="@(() => Navigation.NavigateTo("/budget"))">Orçamentos</a>
+                        </li>
+
+                        <li class="barra-hover">
+                            <div class="barra">
+                            </div><a @onclick="@(() => Navigation.NavigateTo("/about"))">Sobre</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <div class="d-flex justify-content-end">
+                        <div class="social-icons">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+@code {
+
+}
