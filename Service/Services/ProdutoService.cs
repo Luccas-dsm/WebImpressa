@@ -17,7 +17,6 @@ namespace Service.Services
         {
             return await _dataAccess.GetAllProducts();
         }
-
         public Task<ProdutoModel> GetPrdutoByID(string id)
         {
             return _dataAccess.GetPrdutoByID(id);

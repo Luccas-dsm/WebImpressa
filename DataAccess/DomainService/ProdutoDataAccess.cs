@@ -1,4 +1,6 @@
 ﻿using Google.Cloud.Firestore;
+using Google.Cloud.Storage.V1;
+
 using Impressa.Shared.Models;
 using Newtonsoft.Json;
 
@@ -6,14 +8,14 @@ namespace DataAccess.DomainService
 {
     public class ProdutoDataAccess
     {
-        Access fireStoreDb = new Access("genesis-93f18");
+        Access BaseDeDados = new Access("genesis-93f18");
 
         private string Tabela = "Produtos";
         public async Task<List<ProdutoModel>> GetAllProducts()
         {
             try
             {
-                Query employeeQuery = fireStoreDb.AcessoBase().Collection(this.Tabela);
+                Query employeeQuery = BaseDeDados.AcessoBaseFireStore().Collection(this.Tabela);
                 QuerySnapshot employeeQuerySnapshot = await employeeQuery.GetSnapshotAsync();
                 List<ProdutoModel> lstEmployee = new List<ProdutoModel>();
 
@@ -42,7 +44,7 @@ namespace DataAccess.DomainService
         {
             try
             {
-                DocumentReference docRef = fireStoreDb.AcessoBase().Collection(this.Tabela).Document(id);
+                DocumentReference docRef = BaseDeDados.AcessoBaseFireStore().Collection(this.Tabela).Document(id);
                 DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
 
                 if (snapshot.Exists)
@@ -65,7 +67,28 @@ namespace DataAccess.DomainService
         {
             try
             {
-                CollectionReference colRef = fireStoreDb.AcessoBase().Collection("Produtos");
+
+
+                // Crie uma instância do Google Cloud Storage
+                StorageClient storageClient = StorageClient.Create(BaseDeDados.AcessoBaseWebBanco());
+
+                // Defina o nome do bucket onde deseja salvar a imagem
+                string bucketName = "web_banco";
+
+                // Defina o nome do arquivo para salvar no Firebase Storage
+                string fileName = "categoria.jpg";
+
+                // Caminho local da imagem que você deseja carregar
+                string localImagePath = "D:\\sites\\blazor\\Impressa\\Client\\wwwroot\\assets\\categoria-sm.png";
+
+                // Abra um fluxo de leitura para o arquivo local
+                using (var fileStream = File.OpenRead(localImagePath))
+                {
+                    // Faça o upload do arquivo para o Firebase Storage
+                  produto.Imagem = storageClient.UploadObject(bucketName, fileName, null, fileStream).Id;
+                }
+
+                CollectionReference colRef = BaseDeDados.AcessoBaseFireStore().Collection("Produtos");
                 await colRef.AddAsync(produto);
             }
             catch

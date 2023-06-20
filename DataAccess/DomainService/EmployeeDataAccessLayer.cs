@@ -11,9 +11,10 @@ namespace DataAccess.DomainService
 
         public async Task<List<Employee>> GetAllEmployees()
         {
+
             try
             {
-                Query employeeQuery = fireStoreDb.AcessoBase().Collection("employees");
+                Query employeeQuery = fireStoreDb.AcessoBaseFireStore().Collection("employees");
                 QuerySnapshot employeeQuerySnapshot = await employeeQuery.GetSnapshotAsync();
                 List<Employee> lstEmployee = new List<Employee>();
 
@@ -42,7 +43,7 @@ namespace DataAccess.DomainService
         {
             try
             {
-                CollectionReference colRef = fireStoreDb.AcessoBase().Collection("employees");
+                CollectionReference colRef = fireStoreDb.AcessoBaseFireStore().Collection("employees");
                 await colRef.AddAsync(employee);
             }
             catch
@@ -54,7 +55,7 @@ namespace DataAccess.DomainService
         {
             try
             {
-                DocumentReference empRef = fireStoreDb.AcessoBase().Collection("employees").Document(employee.EmployeeId);
+                DocumentReference empRef = fireStoreDb.AcessoBaseFireStore().Collection("employees").Document(employee.EmployeeId);
                 await empRef.SetAsync(employee, SetOptions.Overwrite);
             }
             catch
@@ -66,7 +67,7 @@ namespace DataAccess.DomainService
         {
             try
             {
-                DocumentReference docRef = fireStoreDb.AcessoBase().Collection("employees").Document(id);
+                DocumentReference docRef = fireStoreDb.AcessoBaseFireStore().Collection("employees").Document(id);
                 DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
 
                 if (snapshot.Exists)
@@ -89,7 +90,7 @@ namespace DataAccess.DomainService
         {
             try
             {
-                DocumentReference empRef = fireStoreDb.AcessoBase().Collection("employees").Document(id);
+                DocumentReference empRef = fireStoreDb.AcessoBaseFireStore().Collection("employees").Document(id);
                 await empRef.DeleteAsync();
             }
             catch
@@ -101,7 +102,7 @@ namespace DataAccess.DomainService
         {
             try
             {
-                Query citiesQuery = fireStoreDb.AcessoBase().Collection("cities");
+                Query citiesQuery = fireStoreDb.AcessoBaseFireStore().Collection("cities");
                 QuerySnapshot citiesQuerySnapshot = await citiesQuery.GetSnapshotAsync();
                 List<Cities> lstCity = new List<Cities>();
 
