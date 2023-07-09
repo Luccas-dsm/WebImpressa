@@ -1,11 +1,10 @@
 ﻿using Impressa.Shared.Models;
 using System.Web;
 
-namespace Impressa.Client.Services
+namespace Impressa.Shared
 {
-    public class FerramentasService
+    public class WebTools
     {
-
         public static string GerarLinkWhatsApp(ProdutoModel conteudo)
         {
 

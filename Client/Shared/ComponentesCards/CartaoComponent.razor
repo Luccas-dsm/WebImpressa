@@ -1,5 +1,5 @@
-﻿@using Impressa.Client.Services;
-@using Impressa.Shared.Models;
+﻿@using Impressa.Shared.Models;
+@using Impressa.Shared;
 @inject NavigationManager Navigation
 @inject HttpClient Http
 <div class="cartao">
@@ -135,7 +135,7 @@
     {
         base.OnInitialized();
 
-        EuQueroLink = FerramentasService.GerarLinkWhatsApp(Produto);
+        EuQueroLink = WebTools.GerarLinkWhatsApp(Produto);
     }
 
     private void DefineImagemPrincipal(string url) => ImagemPrincipal = url;
