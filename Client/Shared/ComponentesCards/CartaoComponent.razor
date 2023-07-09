@@ -8,9 +8,9 @@
     </div>
     <div class="img-cartao">
         <img src="@Produto.Imagem.FirstOrDefault().Url" class="img-fluid cursor-pointer" alt="..." width="100%" data-bs-toggle="modal" data-bs-target="#@Produto.Id">
-        <div class="botao-cartao" @onclick="@(() => Navigation.NavigateTo("/category/"+ @Produto.Id))">
-            <span data-bs-toggle="offcanvas" data-bs-target="#@Produto.Id">
-                Eu quero!
+        <div class="botao-cartao">
+            <span>
+                <a class="remove-underscore" href="@EuQueroLink" target="_blank"> Eu quero!</a>
             </span>
         </div>
     </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="botao-comprar">
                             <span>
-                                <a href="@EuQueroLink" target="_blank"> Eu quero!</a>
+                                <a class="remove-underscore"  href="@EuQueroLink" target="_blank"> Eu quero!</a>
                             </span>
                         </div>
                     </div>

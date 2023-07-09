@@ -133,3 +133,8 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.remove-underscore {
+    text-decoration: none !important;
+    color: inherit;
+}
