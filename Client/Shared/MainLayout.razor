@@ -1,19 +1,13 @@
 ﻿@inherits LayoutComponentBase
 
 
-<header>
-    <HeaderComponent></HeaderComponent>
-</header>
-
-<div class="container">
-    <div class="row ">
-        <main class="row ">
+<div class="base">
+    <nav class="sidebar">
+        <SideBarComponent></SideBarComponent>
+    </nav>
+    <main class="container-lg">
+        <div class="row p-container">
             @Body
-        </main>
-    </div>
+        </div>
+    </main>
 </div>
-
-<footer>
-    <FooterComponent></FooterComponent>
-</footer>
-

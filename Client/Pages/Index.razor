@@ -1,9 +1,10 @@
 ﻿@page "/"
 @using Impressa.Shared.Models
+@using Impressa.Client.Shared.ComponentesCards
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
-<main>
+@*<main>
     <section class="espacamento">
         <div class="container">
             <div class="row">
@@ -60,7 +61,17 @@
             </div>
         </div>
     </section>
+</main>*@
+
+
+<main class="col-12 d-flex justify-content-evenly flex-wrap gap-5 ">
+    @foreach (var item in Produtos)
+    {
+        <CartaoComponent Produto="@item" ImagemPrincipal="@item.Imagem.FirstOrDefault().Url" ></CartaoComponent>     
+    }
 </main>
+
+
 
 @code {
 

@@ -1,0 +1,143 @@
+﻿@using Impressa.Client.Services;
+@using Impressa.Shared.Models;
+@inject NavigationManager Navigation
+@inject HttpClient Http
+<div class="cartao">
+    <div class="header-cartao">
+        @Produto.Nome
+    </div>
+    <div class="img-cartao">
+        <img src="@Produto.Imagem.FirstOrDefault().Url" class="img-fluid cursor-pointer" alt="..." width="100%" data-bs-toggle="modal" data-bs-target="#@Produto.Id">
+        <div class="botao-cartao" @onclick="@(() => Navigation.NavigateTo("/category/"+ @Produto.Id))">
+            <span data-bs-toggle="offcanvas" data-bs-target="#@Produto.Id">
+                Eu quero!
+            </span>
+        </div>
+    </div>
+    <div class="descricao">
+        <div class="d-flex gap-3">
+            <div>
+                <div>Formatos</div>
+                <span class="badge text-bg-secondary">A4</span>
+            </div>
+            <div class="vr"></div>
+
+            <div>
+                <div>Gramatura</div>
+                <span class="badge text-bg-secondary">300gr</span>
+                <span class="badge text-bg-secondary">300gr</span>
+                <span class="badge text-bg-secondary">300gr</span>
+            </div>
+            <div class="vr"></div>
+
+            <div>
+                <div>Cores</div>
+                <span class="badge text-bg-secondary">4x1</span>
+                <span class="badge text-bg-secondary">4x0</span>
+                <span class="badge text-bg-secondary">4x4</span>
+            </div>
+        </div>
+        <br />
+        <p>
+            @Produto.Descricao
+        </p>
+        <p class="fonte-size-sm">
+            *Preço sem frete, consulte no final da configuração<br />
+            ** As imagens representadas são meramente ilustrativas
+
+        </p>
+    </div>
+</div>
+
+
+@*Modal Com Descrição Completa*@
+<div class="modal fade"
+     id="@Produto.Id"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    @Produto.Nome
+                </h1>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 d-flex justify-content-center">
+                        <div class="galeria">
+                            <div class="gal-p">  <img src="@ImagemPrincipal" class="img-fluid" alt="..." width="100%"> </div>
+                            <div class="gal-list">
+                                @foreach (var item in Produto.Imagem)
+                                {
+                                    <div class="gal-sm cursor-pointer"> <img src="https://img.freepik.com/fotos-premium/paisagem-quadrada-natural-de-estilo-de-design-de-baixo-poli_70898-8427.jpg?w=2000" class="img-fluid" alt="..." width="100%" @onclick="@(() => DefineImagemPrincipal("https://img.freepik.com/fotos-premium/paisagem-quadrada-natural-de-estilo-de-design-de-baixo-poli_70898-8427.jpg?w=2000"))"> </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                        <p>
+                            @Produto.Descricao
+                        </p>
+                        <div class="d-flex gap-3">
+                            <div>
+                                <div>Formatos</div>
+                                <span class="badge text-bg-secondary">A4</span>
+                            </div>
+                            <div class="vr"></div>
+
+                            <div>
+                                <div>Gramatura</div>
+                                <span class="badge text-bg-secondary">300gr</span>
+                                <span class="badge text-bg-secondary">300gr</span>
+                                <span class="badge text-bg-secondary">300gr</span>
+                            </div>
+                            <div class="vr"></div>
+
+                            <div>
+                                <div>Cores</div>
+                                <span class="badge text-bg-secondary">4x1</span>
+                                <span class="badge text-bg-secondary">4x0</span>
+                                <span class="badge text-bg-secondary">4x4</span>
+                            </div>
+                        </div>
+                        <div class="preco marg-5">
+                            <span>R$@Produto.Preco</span>
+                        </div>
+                        <div class="botao-comprar">
+                            <span>
+                                <a href="@EuQueroLink" target="_blank"> Eu quero!</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ProdutoModel Produto { get; set; }
+
+    [Parameter]
+    public string ImagemPrincipal { get; set; }
+
+    public string EuQueroLink { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        EuQueroLink = FerramentasService.GerarLinkWhatsApp(Produto);
+    }
+
+    private void DefineImagemPrincipal(string url) => ImagemPrincipal = url;
+
+}
